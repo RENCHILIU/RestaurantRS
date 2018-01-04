@@ -1,0 +1,29 @@
+<% include partials/header.ejs %>
+
+
+<div class="container">
+
+    <header class="jumbotron undernav">
+        <div class="container">
+            <h1> restaurantList</h1>
+            <p> Your <strong>BEST</strong> restaurant Recommendation System </p>
+            <a href="/restaurantList/new" class="btn btn-outline-primary"> Add restaurant</a>
+        </div>
+    </header>
+
+
+    <div class="row text-center">
+        <% restaurants.forEach(function (restaurant) { %>
+        <div class="col-md-3 col-sm-6 ">
+            <img class="img-thumbnail" src="<%= restaurant.image %>">
+            <caption><%= restaurant.name %></caption>
+
+        </div>
+        <% }) %>
+    </div>
+
+
+
+
+</div>
+<% include partials/footer.ejs %>
