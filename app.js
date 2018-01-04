@@ -1,84 +1,108 @@
 var express = require('express'),
-bodyParse   = require('body-parser'),
-app         = express();
+    bodyParse = require('body-parser'),
+    mongoose = require('mongoose'),
+    app = express();
 
 
 app.set("view engine", "ejs");
 app.use(express.static('public'));
-app.use(bodyParse.urlencoded({extended:true}));
+app.use(bodyParse.urlencoded({extended: true}));
 
+mongoose.connect("mongodb://localhost/restaurants");
+
+var restaurantSchema = new mongoose.Schema({
+    name: String,
+    image: String,
+    description: String
+});
+
+var restaurant = mongoose.model("restaurant", restaurantSchema);
+
+
+//
+// restaurant.create( {
+//     name: "Pappas Bros. Steakhouse",
+//     image: "https://s3-media1.fl.yelpcdn.com/bphoto/pJjvgTwcEvUcofvyA0r-zQ/o.jpg",
+//     description: "this is a description for the res!!!"
+// });
 
 
 app.get("/", function (req, res) {
     res.render("index");
 });
 
-var restaurants = [
-    {
-        name: "Pappas Bros. Steakhouse",
-        image: "https://s3-media1.fl.yelpcdn.com/bphoto/pJjvgTwcEvUcofvyA0r-zQ/o.jpg"
-    },
-    {
-        name: "Pappas Bros. Steakhouse",
-        image: "https://s3-media2.fl.yelpcdn.com/bphoto/U5rcSL8TYjLQqqHZPAU7VQ/o.jpg"
-    }, {
-        name: "Pappas Bros. Steakhouse",
-        image: "https://s3-media3.fl.yelpcdn.com/bphoto/H7S8NkBxLklXDZir9sIlVg/o.jpg"
-    },
-    {
-        name: "Pappas Bros. Steakhouse",
-        image: "https://s3-media1.fl.yelpcdn.com/bphoto/pJjvgTwcEvUcofvyA0r-zQ/o.jpg"
-    }, {
-        name: "Pappas Bros. Steakhouse",
-        image: "https://s3-media1.fl.yelpcdn.com/bphoto/pJjvgTwcEvUcofvyA0r-zQ/o.jpg"
-    },
-    {
-        name: "Pappas Bros. Steakhouse",
-        image: "https://s3-media2.fl.yelpcdn.com/bphoto/U5rcSL8TYjLQqqHZPAU7VQ/o.jpg"
-    }, {
-        name: "Pappas Bros. Steakhouse",
-        image: "https://s3-media1.fl.yelpcdn.com/bphoto/pJjvgTwcEvUcofvyA0r-zQ/o.jpg"
-    },
-    {
-        name: "Pappas Bros. Steakhouse",
-        image: "https://s3-media1.fl.yelpcdn.com/bphoto/pJjvgTwcEvUcofvyA0r-zQ/o.jpg"
-    }
-];
 
-app.get("/restaurantList", function (req, res) {
+//--------------------------------------
+//                  Index Route
+//--------------------------------------
+app.get("/restaurant", function (req, res) {
+    //get all data from the mongoDB
 
-
-    res.render("restaurantList",{restaurants:restaurants})
+    restaurant.find({}, function (err, allRestaurants) {
+        if (err) {
+            console.log(err);
+            res.render("error");
+        } else {
+            res.render("restaurantList", {restaurants: allRestaurants});
+        }
+    })
 });
 
 
-// create Route
-
-app.get("/restaurantList/new", function (req, res) {
+//--------------------------------------
+//                  New Route
+//--------------------------------------
+app.get("/restaurant/new", function (req, res) {
 
     res.render("newRestaurant");
 });
 
 
-
-
-
-
-app.post("/restaurantList",function (req, res) {
-
-    //get data from the "/restaurantList/new"
-
+//--------------------------------------
+//                  Crete Route
+//--------------------------------------
+app.post("/restaurant", function (req, res) {
+    //get post data from the "/restaurantList/new"
     var name = req.body.name;
     var imageurl = req.body.image;
-    var newRestaurant = {name:name,image:imageurl};
-    restaurants.push(newRestaurant);
+    var description = req.body.description;
+    var newRestaurant = {name: name, image: imageurl,description:description};
 
-    res.redirect("/restaurantList");
+    restaurant.create(newRestaurant, function (err, thisRestaurant) {
+        if (err) {
+            console.log(err);
+            res.render("error", {err: err});
+        }
+        res.redirect("restaurantList");
+    });
+});
 
-
-
+//--------------------------------------
+//                  Show Route
+//--------------------------------------
+app.get('/restaurant/:id',function (req, res) {
+    restaurant.findById(req.params.id ,function (err, thisResraurant) {
+        if(err){
+            console.log(err);
+            res.render("error", {err: err});
+        }else{
+            res.render("showRestaurant",{restaurant:thisResraurant});
+        }
+    })
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

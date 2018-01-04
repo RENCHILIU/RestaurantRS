@@ -7,7 +7,7 @@
         <div class="container">
             <h1> restaurantList</h1>
             <p> Your <strong>BEST</strong> restaurant Recommendation System </p>
-            <a href="/restaurantList/new" class="btn btn-outline-primary"> Add restaurant</a>
+            <a href="/restaurant/new" class="btn btn-outline-primary"> Add restaurant</a>
         </div>
     </header>
 
@@ -17,7 +17,7 @@
         <div class="col-md-3 col-sm-6 ">
             <img class="img-thumbnail" src="<%= restaurant.image %>">
             <caption><%= restaurant.name %></caption>
-
+            <a href = "restaurant/<%=restaurant._id%>" class="btn btn-primary btn-sm">More info</a>
         </div>
         <% }) %>
     </div>
