@@ -17,7 +17,10 @@
         <div class="col-md-3 col-sm-6 ">
             <img class="img-thumbnail" src="<%= restaurant.image %>">
             <caption><%= restaurant.name %></caption>
-            <a href = "restaurant/<%=restaurant._id%>" class="btn btn-primary btn-sm">More info</a>
+            <div>
+                <a href = "restaurant/<%=restaurant._id%>" class="btn btn-link">More info</a>
+            </div>
+
         </div>
         <% }) %>
     </div>

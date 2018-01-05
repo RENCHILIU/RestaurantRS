@@ -1,7 +1,9 @@
-var express = require('express'),
-    bodyParse = require('body-parser'),
-    mongoose = require('mongoose'),
-    app = express();
+var express     = require('express'),
+    bodyParse   = require('body-parser'),
+    mongoose    = require('mongoose'),
+    app         = express(),
+    restaurant  = require('./models/restaurant'),
+    seedDB  = require("./seeds");
 
 
 app.set("view engine", "ejs");
@@ -10,21 +12,10 @@ app.use(bodyParse.urlencoded({extended: true}));
 
 mongoose.connect("mongodb://localhost/restaurants");
 
-var restaurantSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-});
 
-var restaurant = mongoose.model("restaurant", restaurantSchema);
+seedDB();
 
-
-//
-// restaurant.create( {
-//     name: "Pappas Bros. Steakhouse",
-//     image: "https://s3-media1.fl.yelpcdn.com/bphoto/pJjvgTwcEvUcofvyA0r-zQ/o.jpg",
-//     description: "this is a description for the res!!!"
-// });
+var comment = require('./models/comment');
 
 
 app.get("/", function (req, res) {
@@ -81,11 +72,12 @@ app.post("/restaurant", function (req, res) {
 //                  Show Route
 //--------------------------------------
 app.get('/restaurant/:id',function (req, res) {
-    restaurant.findById(req.params.id ,function (err, thisResraurant) {
+    restaurant.findById(req.params.id).populate("comments").exec(function (err, thisResraurant) {
         if(err){
             console.log(err);
             res.render("error", {err: err});
         }else{
+
             res.render("showRestaurant",{restaurant:thisResraurant});
         }
     })

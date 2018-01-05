@@ -4,5 +4,15 @@
     <h2> <%= restaurant.name %></h2>
     <img src="<%=restaurant.image%>">
     <p><%= restaurant.description %></p>
+    <%restaurant.comments.forEach(function (comment) {  %>
+    <p>
+
+        <strong><%= comment.author%></strong> - <%=comment.text%>
+
+    </p>
+
+
+
+   <% })%>
 </div>
 <% include partials/footer.ejs %>
