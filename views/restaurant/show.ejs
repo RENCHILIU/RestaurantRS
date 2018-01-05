@@ -1,9 +1,14 @@
-<% include partials/header.ejs %>
+<% include ../partials/header.ejs %>
 <div class="container undernav">
 
     <h2> <%= restaurant.name %></h2>
     <img src="<%=restaurant.image%>">
     <p><%= restaurant.description %></p>
+
+    <p>
+        <a class="btn btn-sm btn-primary" href="/restaurant/<%=restaurant._id%>/comments/new">Add new Comment</a>
+    </p>
+
     <%restaurant.comments.forEach(function (comment) {  %>
     <p>
 
@@ -15,4 +20,4 @@
 
    <% })%>
 </div>
-<% include partials/footer.ejs %>
+<% include ../partials/footer.ejs %>
