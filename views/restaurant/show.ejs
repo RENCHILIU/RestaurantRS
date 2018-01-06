@@ -1,23 +1,43 @@
 <% include ../partials/header.ejs %>
 <div class="container undernav">
 
-    <h2> <%= restaurant.name %></h2>
-    <img src="<%=restaurant.image%>">
-    <p><%= restaurant.description %></p>
 
-    <p>
-        <a class="btn btn-sm btn-primary" href="/restaurant/<%=restaurant._id%>/comments/new">Add new Comment</a>
-    </p>
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group ">
+                <li class="list-group-item active">Detail</li>
+                <li class="list-group-item">Destination</li>
+                <li class="list-group-item">Contact us</li>
+            </ul>
+        </div>
+        <div class="col-md-9">
 
-    <%restaurant.comments.forEach(function (comment) {  %>
-    <p>
+            <div class="card">
+                <img class="card-img-top" src="<%= restaurant.image %>">
+                <div class="container">
+                    <h2 class = "text-center"> <%= restaurant.name %></h2>
+                    <p class="py-2"><%= restaurant.description %></p>
+                </div>
+            </div>
 
-        <strong><%= comment.author%></strong> - <%=comment.text%>
+            <br>
+            <div class="card">
 
-    </p>
+                <div class="container py-2">
+                    <a class="btn btn-sm btn-primary btn-outline-success float-right" href="/restaurant/<%= restaurant._id %>/comments/new">Add
+                        new Comment</a>
+
+                    <br>
+                    <% restaurant.comments.forEach(function (comment) { %>
+                    <div><strong><%= comment.author %></strong></div>
+                    <div> <%= comment.text %></div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
 
 
 
-   <% })%>
+    </div>
 </div>
 <% include ../partials/footer.ejs %>
