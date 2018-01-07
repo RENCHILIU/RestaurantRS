@@ -38,10 +38,10 @@ passport.deserializeUser(User.deserializeUser());
 //---------------------------------------------
 
 
-
+// seedDB();
 
 //---------------------------------------------
-// seedDB();
+// mongodb connect
 mongoose.connect("mongodb://localhost/restaurants");
 //---------------------------------------------
 

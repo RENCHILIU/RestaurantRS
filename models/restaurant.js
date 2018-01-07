@@ -3,13 +3,21 @@ var restaurantSchema = new mongoose.Schema({
     name: String,
     image: String,
     description: String,
-    comments: [
+    author:
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "comment"
-        }
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User"
+            },
+            username: String
+        },
+    comments:
+        [{
+            // !!! important  no need id
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "comment"
 
-    ]
+        }]
 });
 
 var restaurant = mongoose.model("restaurant", restaurantSchema);

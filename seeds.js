@@ -52,29 +52,29 @@ function seedDB() {
 
             // add a few restaurant
 
-            data.forEach(function (seed) {
-                restaurant.create(seed, function (err, thisdata) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log("created a restaurant");
-
-                        comment.create({
-                            text: "this is a good place!! ",
-                            author: "John"
-                        }, function (err, thiscomment) {
-                            if (err) {
-                                console.log(err);
-                            } else {
-                                thisdata.comments.push(thiscomment);
-                                thisdata.save();
-                                console.log("created a new comment")
-
-                            }
-                        })
-                    }
-                })
-            })
+            // data.forEach(function (seed) {
+            //     restaurant.create(seed, function (err, thisdata) {
+            //         if (err) {
+            //             console.log(err);
+            //         } else {
+            //             console.log("created a restaurant");
+            //
+            //             // comment.create({
+            //             //     text: "this is a good place!! ",
+            //             //     author: "John"
+            //             // }, function (err, thiscomment) {
+            //             //     if (err) {
+            //             //         console.log(err);
+            //             //     } else {
+            //             //         thisdata.comments.push(thiscomment);
+            //             //         thisdata.save();
+            //             //         console.log("created a new comment")
+            //             //
+            //             //     }
+            //             // })
+            //         }
+            //     })
+            // })
         }
     });
 

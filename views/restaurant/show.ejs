@@ -15,7 +15,7 @@
             <div class="card">
                 <img class="card-img-top" src="<%= restaurant.image %>">
                 <div class="container">
-                    <h2 class = "text-center"> <%= restaurant.name %></h2>
+                    <h2 class="text-center"> <%= restaurant.name %></h2>
                     <p class="py-2"><%= restaurant.description %></p>
                 </div>
             </div>
@@ -24,18 +24,24 @@
             <div class="card">
 
                 <div class="container py-2">
-                    <a class="btn btn-sm btn-primary btn-outline-success float-right" href="/restaurant/<%= restaurant._id %>/comments/new">Add
+                    <a class="btn btn-sm btn-primary btn-outline-success float-right"
+                       href="/restaurant/<%= restaurant._id %>/comments/new">Add
                         new Comment</a>
 
                     <br>
+                   <!--// if the comments is empty, cannot use forEach&ndash;&gt;&ndash;&gt;-->
                     <% restaurant.comments.forEach(function (comment) { %>
-                    <div><strong><%= comment.author %></strong></div>
+
+                    <!--<div><strong><%= comment.author.username %></strong></div>-->
+                    <em><%= restaurant.author.username %></em>
                     <div> <%= comment.text %></div>
+
+
                     <% }) %>
+
                 </div>
             </div>
         </div>
-
 
 
     </div>

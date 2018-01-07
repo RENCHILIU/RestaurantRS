@@ -5,29 +5,45 @@
     <title>Blog APP</title>
 
     <link rel="stylesheet" href="/stylesheets/app.css">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #778899;">
-
+<nav class="navbar fixed-top navbar-expand-md navbar-dark" style="background-color: #778899;">
     <div class="container-fluid">
-        <div class="navbar-nav">
-            <a class="navbar-brand" href="/restaurant"><i class="fa fa-cutlery" aria-hidden="true"></i> Restaurant</a>
-        </div>
 
-        <div class="float-right">
-            <div class="navbar-nav collapse navbar-collapse ">
-                <% if(!currentUser){ %>
-                <a class="nav-link nav-item" href="/login">Login</a>
-                <a class="nav-link nav-item" href="/register">Sign up</a>
+        <a class="navbar-brand" href="/restaurant"><i class="fa fa-cutlery" aria-hidden="true"></i> Restaurant</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <% } else{ %>
-                <a class="nav-item mx-2 text-white">Signed as <%=currentUser.username%></a>
-                <a class="nav-link nav-item" href="/logout">Log out</a>
-                <% } %>
+
+            <div class="collapse navbar-collapse " id="navbarNav">
+
+                <div class="navbar-nav ml-md-auto">
+
+                    <% if(!currentUser){ %>
+                    <div class="nav-item">
+                        <a class="nav-link " href="/login">Login</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="nav-link" href="/register">Sign up</a>
+                    </div>
+
+                    <% } else{ %>
+                    <div class="nav-item">
+                        <a class="mx-2 text-white">Signed as <%= currentUser.username %></a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="nav-link" href="/logout">Log out</a>
+                    </div>
+
+                    <% } %>
+                </div>
             </div>
 
-        </div>
+    </div>
     </div>
 </nav>

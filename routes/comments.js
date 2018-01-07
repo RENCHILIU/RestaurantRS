@@ -1,5 +1,3 @@
-
-
 var express = require('express');
 var router = express.Router();
 var restaurant = require("../models/restaurant");
@@ -31,15 +29,22 @@ router.post('/restaurant/:id/comments', isLoggedIn, function (req, res) {
             console.log(err);
             res.redirect('/restaurant');
         } else {
-            req.body.comment.author = req.user.username; // when logged in ,get username form auth
+
             comment.create(req.body.comment, function (err, createdComment) {
                 // console.log(createdComment);
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log(foundRestaurant);
+                    // console.log(foundRestaurant);
+
+                    // console.log(req.user);
+                    createdComment.author.username = req.user.username; // when logged in ,get username form auth
+                    createdComment.author.id = req.user._id;
+
+
                     foundRestaurant.comments.push(createdComment);
                     foundRestaurant.save();
+                     // console.log(createdComment);
                     res.redirect('/restaurant/' + req.params.id);
                 }
             })
