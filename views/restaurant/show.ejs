@@ -17,6 +17,17 @@
                 <div class="container">
                     <h2 class="text-center"> <%= restaurant.name %></h2>
                     <p class="py-2"><%= restaurant.description %></p>
+                    <p>
+                        <em> Submitted by <%= restaurant.author.username %></em>
+                    </p>
+                    <!--check if currentUser is empty-->
+                    <% if(currentUser && restaurant.author.id.equals(currentUser.id)){ %>
+                    <a class="btn btn-warning my-2" href="/restaurant/<%= restaurant._id %>/edit"> Edit</a>
+                    <form class="delete-form" action="/restaurant/<%= restaurant._id %>?_method=DELETE" method="post">
+                        <input type="submit" class="btn btn-danger my-2 " value="Delete">
+                    </form>
+                    <% } %>
+
                 </div>
             </div>
 
@@ -29,16 +40,22 @@
                         new Comment</a>
 
                     <br>
-                   <!--// if the comments is empty, cannot use forEach&ndash;&gt;&ndash;&gt;-->
+                    <!--// if the comments is empty, cannot use forEach&ndash;&gt;&ndash;&gt;-->
                     <% restaurant.comments.forEach(function (comment) { %>
-
                     <!--<div><strong><%= comment.author.username %></strong></div>-->
-                    <em><%= restaurant.author.username %></em>
-                    <div> <%= comment.text %></div>
-
-
+                    <p><em><%= restaurant.author.username %></em></p>
+                    <p> <%= comment.text %></p>
+                    <!--check if currentUser is empty-->
+                    <% if(currentUser && restaurant.author.id.equals(currentUser.id)){ %>
+                    <a class="btn btn-sm btn-warning"
+                       href="/restaurant/<%= restaurant._id %>/comments/<%= comment._id %>/edit">Edit</a>
+                    <form class="delete-form"
+                          action="/restaurant/<%= restaurant._id %>/comments/<%= comment._id %>?_method=DELETE"
+                          method="POST">
+                        <input type="submit" class="btn btn-danger btn-sm my-2 " value="detele">
+                    </form>
+                    <% } %>
                     <% }) %>
-
                 </div>
             </div>
         </div>

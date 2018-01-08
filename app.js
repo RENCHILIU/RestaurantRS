@@ -8,7 +8,8 @@ var express = require('express'),
     passport = require('passport'),
     LocalStrategy = require('passport-local'),
     passportLocalMongoose = require('passport-local-mongoose'),
-    User = require("./models/user.js");
+    User = require("./models/user.js"),
+    methodOverride = require("method-override");
 
 
 
@@ -18,10 +19,11 @@ var express = require('express'),
 app.set("view engine", "ejs");
 app.use(express.static('public'));
 app.use(bodyParse.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 //---------------------------------------------
 
 
-
+// mongoose.Promise = global.Promise;
 
 //---------------------------------------------
 // passport configuration
@@ -52,6 +54,7 @@ mongoose.connect("mongodb://localhost/restaurants");
 
 //---------------------------------------------
 // check user
+// every page can access the user info , in order to auth
 app.use(function (req, res, next) {
     res.locals.currentUser = req.user;
     // console.log(req.user);
@@ -68,13 +71,15 @@ var commentRoutes    = require("./routes/comments"),
     authRoutes       = require("./routes/auth");
 
 app.use(commentRoutes);
-app.use(restaurantRoutes);
 
+app.use(restaurantRoutes);
 // app.use("/restaurant",restaurantRoutes);
 // this means all start with /restaurant
 // if there is param in the url. need add
 // """ var router = express.Router({mergeParams: true}); """
 // in the router
+
+
 app.use(authRoutes);
 //---------------------------------------------
 

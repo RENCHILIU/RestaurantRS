@@ -1,0 +1,28 @@
+<% include ../partials/header.ejs %>
+
+<div class="container undernav">
+    <div class="editForm">
+
+        <h1 style="text-align: center"> Edit <%=restaurant.name%></h1>
+
+        <form action='/restaurant/<%=restaurant._id%>?_method=PUT' method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" name="restaurant[name]" value="<%= restaurant.name%>">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="restaurant[image]" value="<%= restaurant.image%>">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="restaurant[description]" value="<%= restaurant.description%>">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-lg btn-primary btn-block">
+            </div>
+        </form>
+
+        <a href="/restaurant"> Back to the restaurantList</a>
+
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>
