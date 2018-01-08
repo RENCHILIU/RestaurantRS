@@ -1,7 +1,3 @@
-
-
-
-
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
@@ -26,7 +22,7 @@ router.post('/register', function (req, res) {
             return res.render('auth/register');
         }
         passport.authenticate("local")(req, res, function () {
-            res.redirect("/");
+            res.redirect("/restaurant");
         })
     })
 
@@ -65,7 +61,7 @@ router.get('/login', function (req, res) {
 // middleware  , before the call back function
 //passport.use(new LocalStrategy(User.authenticate()));
 router.post('/login', passport.authenticate("local", {
-    successRedirect: '/',
+    successRedirect: '/restaurant',
     failureRedirect: '/login'
 }), function (req, res) {
     console.log(req.body);

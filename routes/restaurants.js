@@ -6,7 +6,7 @@ var middlewareObj = require("../middleware");
 
 router.get("/", function (req, res) {
 
-    res.redirect('/restaurant');
+    res.render('landing');
 });
 
 //--------------------------------------
@@ -51,9 +51,9 @@ router.post("/restaurant", middlewareObj.isLoggedIn, function (req, res) {
     restaurant.create(newRestaurant, function (err, thisRestaurant) {
         if (err) {
             console.log(err);
-            res.redirect('/')
+            res.redirect('/restaurant')
         }
-        res.redirect("/");
+        res.redirect("/restaurant");
     });
 });
 
