@@ -1,6 +1,6 @@
 
 #####Landing page
-![Screen Shot 2018-01-08 at 10.45.03 A](https://lh3.googleusercontent.com/-LC-lWQfTJgo/WlOjtKL-dDI/AAAAAAAAO_c/4PWTahXgvh4NsT6PV0ACkQQwVf9ioz08gCHMYCw/I/Screen%2BShot%2B2018-01-08%2Bat%2B10.45.03%2BAM.png)
+![landing](https://lh3.googleusercontent.com/-WTl7-XgnI24/WlOlEYbrEvI/AAAAAAAAPAE/nJ9FMah-mA8ZcCnXokDPTeEuZnb-JLwcQCHMYCw/I/landing.png)
 
 #####Home page
 ![Screen Shot 2018-01-08 at 10.56.41 A](https://lh3.googleusercontent.com/-MX1GrXQYLIM/WlOjtmF25ZI/AAAAAAAAO_g/tQI3otBDHyUR1ILgHn3PO4oKjB7Y5TKygCHMYCw/I/Screen%2BShot%2B2018-01-08%2Bat%2B10.56.41%2BAM.png)
