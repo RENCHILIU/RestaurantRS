@@ -14,6 +14,7 @@ middlewareObj.checkCommentOwnership = function (req, res, next) {
         comment.findById(req.params.comment_id, function (err, foundComment) {
             if (err) {
                 console.log(err);
+                req.flash("error","Comment not found");
                 res.redirect("back")
             } else {
                 // foundRestaurant.author.id is an object
@@ -22,6 +23,7 @@ middlewareObj.checkCommentOwnership = function (req, res, next) {
                 if (foundComment.author.id.equals(req.user._id)) {
                     next();
                 } else {
+                    req.flash("error","you don't have permission to do that");
                     res.redirect("back")
                 }
             }
@@ -35,7 +37,7 @@ middlewareObj.isLoggedIn = function (req, res, next) {
         return next();
 
     }
-
+    req.flash("error","You need log in first");
     res.redirect('/login');
 };
 
@@ -47,6 +49,7 @@ middlewareObj.checkRestaurantOwnership = function(req,res,next) {
     if(req.isAuthenticated()){
         restaurant.findById(req.params.id, function (err, foundRestaurant) {
             if (err) {
+                req.flash("error","Restaurant not found");
                 console.log(err);
                 res.redirect("back")
             } else {
@@ -56,6 +59,7 @@ middlewareObj.checkRestaurantOwnership = function(req,res,next) {
                 if(foundRestaurant.author.id.equals(req.user._id)){
                     next();
                 }else{
+                    req.flash("error","you don't have permission to do that");
                     res.redirect("back")
                 }
             }

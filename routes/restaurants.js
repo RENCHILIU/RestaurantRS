@@ -5,6 +5,7 @@ var middlewareObj = require("../middleware");
 // var middlewareObj = require("../middleware/index.js");  index is the home page
 
 router.get("/", function (req, res) {
+
     res.redirect('/restaurant');
 });
 
@@ -28,6 +29,7 @@ router.get("/restaurant", function (req, res) {
 //                  New Route
 //--------------------------------------
 router.get("/restaurant/new", middlewareObj.isLoggedIn, function (req, res) {
+
 
     res.render("restaurant/new");
 });

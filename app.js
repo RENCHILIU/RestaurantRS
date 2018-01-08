@@ -9,7 +9,8 @@ var express = require('express'),
     LocalStrategy = require('passport-local'),
     passportLocalMongoose = require('passport-local-mongoose'),
     User = require("./models/user.js"),
-    methodOverride = require("method-override");
+    methodOverride = require("method-override"),
+    flash = require('connect-flash');
 
 
 
@@ -20,6 +21,7 @@ app.set("view engine", "ejs");
 app.use(express.static('public'));
 app.use(bodyParse.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
+app.use(flash());
 //---------------------------------------------
 
 
@@ -57,10 +59,14 @@ mongoose.connect("mongodb://localhost/restaurants");
 // every page can access the user info , in order to auth
 app.use(function (req, res, next) {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash('error');
+    res.locals.success = req.flash('success');
     // console.log(req.user);
     next();
 });
 //---------------------------------------------
+
+
 
 
 
